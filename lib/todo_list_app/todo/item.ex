@@ -3,9 +3,9 @@ defmodule TodoListApp.Todo.Item do
   import Ecto.Changeset
 
   schema "items" do
-    field :status, :integer
+    field :status, :integer, default: 0
     field :text, :string
-    field :person_id, :integer
+    field :person_id, :integer, default: 0
 
     timestamps(type: :utc_datetime)
   end
