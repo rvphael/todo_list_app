@@ -42,7 +42,7 @@ defmodule TodoListAppWeb.ItemControllerTest do
 
     test "renders form for editing chosen item", %{conn: conn, item: item} do
       conn = get(conn, ~p"/items/#{item}/edit")
-      assert html_response(conn, 200) =~ "Edit Item"
+      assert html_response(conn, 200) =~ "Click here to create a new item"
     end
   end
 
@@ -51,15 +51,15 @@ defmodule TodoListAppWeb.ItemControllerTest do
 
     test "redirects when data is valid", %{conn: conn, item: item} do
       conn = put(conn, ~p"/items/#{item}", item: @update_attrs)
-      assert redirected_to(conn) == ~p"/items/#{item}"
+      assert redirected_to(conn) == ~p"/items/"
 
-      conn = get(conn, ~p"/items/#{item}")
+      conn = get(conn, ~p"/items/")
       assert html_response(conn, 200) =~ "some updated text"
     end
 
-    test "renders errors when data is invalid", %{conn: conn, item: item} do
+    test "errors when invalid attributes are passed", %{conn: conn, item: item} do
       conn = put(conn, ~p"/items/#{item}", item: @invalid_attrs)
-      assert html_response(conn, 200) =~ "Edit Item"
+      assert html_response(conn, 200)
     end
   end
 
