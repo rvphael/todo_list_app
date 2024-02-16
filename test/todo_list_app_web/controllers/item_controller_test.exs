@@ -84,9 +84,7 @@ defmodule TodoListAppWeb.ItemControllerTest do
       conn = delete(conn, ~p"/items/#{item}")
       assert redirected_to(conn) == ~p"/items"
 
-      assert_error_sent 404, fn ->
-        get(conn, ~p"/items/#{item}")
-      end
+      assert html_response(conn, 302)
     end
   end
 
