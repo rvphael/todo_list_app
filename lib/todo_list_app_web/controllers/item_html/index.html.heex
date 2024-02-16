@@ -12,21 +12,20 @@
           <div class="view">
             <%= if item.status==1 do %>
               <input class="toggle" type="checkbox" checked />
-              <% else %>
-                <input class="toggle" type="checkbox" />
-                <% end %>
-                  <label>
-                    <%= item.text %>
-                  </label>
-                  <.link class="destroy" href={~p"/items/#{item}"} method="delete">
-                  </.link>
+            <% else %>
+              <input class="toggle" type="checkbox" />
+            <% end %>
+            <label>
+              <%= item.text %>
+            </label>
+            <.link class="destroy" href={~p"/items/#{item}"} method="delete"></.link>
           </div>
         </li>
-        <% end %>
+      <% end %>
     </ul>
   </section>
   <footer class="footer" style="display: block;">
-    <span class="todo-count"><strong>1</strong> item left</span>
+    <span class="todo-count"><%= remaining_items(@items) %> items left</span>
     <ul class="filters">
       <li>
         <a href="#/" class="selected">All</a>
