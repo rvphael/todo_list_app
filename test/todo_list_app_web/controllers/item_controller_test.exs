@@ -6,6 +6,7 @@ defmodule TodoListAppWeb.ItemControllerTest do
   import TodoListApp.TodoFixtures
 
   @create_attrs %{person_id: 42, status: 0, text: "some text"}
+  @public_create_attrs %{person_id: 0, status: 0, text: "some public text"}
   @update_attrs %{person_id: 43, status: 1, text: "some updated text"}
   @invalid_attrs %{person_id: nil, status: nil, text: nil}
 
