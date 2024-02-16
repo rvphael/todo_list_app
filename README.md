@@ -1,5 +1,8 @@
 # TodoListApp
 
+![image](https://github.com/rvphael/todo_list_app/assets/18425056/db0fe8a7-00cf-4500-8fa5-e632f3c0d477)
+
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
