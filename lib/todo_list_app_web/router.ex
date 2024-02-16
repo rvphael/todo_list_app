@@ -21,7 +21,7 @@ defmodule TodoListAppWeb.Router do
     get "/items/toggle/:id", ItemController, :toggle
     get "/items/clear", ItemController, :clear_completed
     get "/items/filter/:filter", ItemController, :index
-    resources "/items", ItemController
+    resources "/items", ItemController, except: [:show]
   end
 
   # Other scopes may use custom stacks.
