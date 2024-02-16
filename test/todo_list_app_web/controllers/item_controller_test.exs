@@ -14,6 +14,18 @@ defmodule TodoListAppWeb.ItemControllerTest do
       conn = get(conn, ~p"/items")
       assert html_response(conn, 200)
     end
+
+    test "lists items in filter", %{conn: conn} do
+      conn = post(conn, ~p"/items", item: @public_create_attrs)
+
+      # After creating item, navigate to 'active' filter page
+      conn = get(conn, ~p"/items/filter/active")
+      assert html_response(conn, 200) =~ @public_create_attrs.text
+
+      # Navigate to 'completed page'
+      conn = get(conn, ~p"/items/filter/completed")
+      assert !(html_response(conn, 200) =~ @public_create_attrs.text)
+    end
   end
 
   describe "new item" do
