@@ -156,8 +156,7 @@ defmodule TodoListAppWeb.CoreComponents do
         phx-connected={hide("#client-error")}
         hidden
       >
-        Attempting to reconnect
-        <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
+        Attempting to reconnect <.icon name="hero-arrow-path" class="ml-1 h-3 w-3 animate-spin" />
       </.flash>
 
       <.flash
@@ -373,13 +372,11 @@ defmodule TodoListAppWeb.CoreComponents do
       <input
         type={@type}
         name={@name}
-        id={@id}
-        value={Phoenix.HTML.Form.normalize_value(@type, @value)}
+        id={@id || @name}
+        value={@value}
         class={[
-          "mt-2 block w-full rounded-lg text-zinc-900 focus:ring-0 sm:text-sm sm:leading-6",
-          "phx-no-feedback:border-zinc-300 phx-no-feedback:focus:border-zinc-400",
-          @errors == [] && "border-zinc-300 focus:border-zinc-400",
-          @errors != [] && "border-rose-400 focus:border-rose-400"
+          input_border(@errors),
+          "new-todo"
         ]}
         {@rest}
       />
@@ -387,6 +384,12 @@ defmodule TodoListAppWeb.CoreComponents do
     </div>
     """
   end
+
+  defp input_border([] = _errors),
+    do: "border-zinc-300 focus:border-zinc-400 focus:ring-zinc-800/5"
+
+  defp input_border([_ | _] = _errors),
+    do: "border-rose-400 focus:border-rose-400 focus:ring-rose-400/10"
 
   @doc """
   Renders a label.
