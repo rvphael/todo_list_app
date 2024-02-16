@@ -18,9 +18,10 @@ defmodule TodoListAppWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    resources "/items", ItemController
     get "/items/toggle/:id", ItemController, :toggle
+    get "/items/clear", ItemController, :clear_completed
     get "/items/filter/:filter", ItemController, :index
+    resources "/items", ItemController
   end
 
   # Other scopes may use custom stacks.

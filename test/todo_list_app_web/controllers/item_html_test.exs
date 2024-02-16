@@ -27,9 +27,9 @@ defmodule TodoListAppWeb.ItemHTMLTest do
       %{text: "six", status: 1}
     ]
 
-    assert length(ItemHTML.filter(items, "items")) == 6
+    assert length(ItemHTML.filter(items, "items")) == 4
     assert length(ItemHTML.filter(items, "active")) == 2
     assert length(ItemHTML.filter(items, "completed")) == 2
-    assert length(ItemHTML.filter(items, "any")) == 6
+    assert length(ItemHTML.filter(items, "any")) == 4
   end
 end

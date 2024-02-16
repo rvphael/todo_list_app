@@ -16,10 +16,10 @@ defmodule TodoListAppWeb.ItemHTML do
 
   def filter(items, str) do
     case str do
-      "items" -> items
+      "items" -> Enum.filter(items, fn i -> i.status !== 2 end)
       "active" -> Enum.filter(items, fn i -> i.status == 0 end)
       "completed" -> Enum.filter(items, fn i -> i.status == 1 end)
-      _ -> items
+      _ -> Enum.filter(items, fn i -> i.status !== 2 end)
     end
   end
 end

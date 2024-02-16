@@ -1,6 +1,9 @@
 defmodule TodoListAppWeb.ItemController do
   use TodoListAppWeb, :controller
 
+  import Ecto.Query
+
+  alias TodoListApp.Repo
   alias TodoListApp.Todo
   alias TodoListApp.Todo.Item
 
@@ -84,5 +87,12 @@ defmodule TodoListAppWeb.ItemController do
 
     conn
     |> redirect(to: ~p"/items")
+  end
+
+  def clear_completed(conn, _params) do
+    query = from(i in Item, where: i.status == 1)
+    Repo.update_all(query, set: [status: 2])
+
+    index(conn, %{filter: "all"})
   end
 end

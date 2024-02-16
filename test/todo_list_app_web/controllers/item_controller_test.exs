@@ -1,5 +1,5 @@
 defmodule TodoListAppWeb.ItemControllerTest do
-  use TodoListAppWeb.ConnCase
+  use TodoListAppWeb.ConnCase, async: true
 
   alias TodoListApp.Todo
 
@@ -7,6 +7,7 @@ defmodule TodoListAppWeb.ItemControllerTest do
 
   @create_attrs %{person_id: 42, status: 0, text: "some text"}
   @public_create_attrs %{person_id: 0, status: 0, text: "some public text"}
+  @public_completed_attrs %{person_id: 0, status: 1, text: "some public text completed"}
   @update_attrs %{person_id: 43, status: 1, text: "some updated text"}
   @invalid_attrs %{person_id: nil, status: nil, text: nil}
 
@@ -106,6 +107,20 @@ defmodule TodoListAppWeb.ItemControllerTest do
       get(conn, ~p'/items/toggle/#{item.id}')
       toggled_item = Todo.get_item!(item.id)
       assert toggled_item.status == 1
+    end
+  end
+
+  describe "clear completed" do
+    setup [:create_item]
+
+    test "clears the completed items", %{conn: conn} do
+      # Creating completed item
+      conn = post(conn, ~p"/items", item: @public_completed_attrs)
+      # Clearing completed items
+      conn = get(conn, ~p"/items/clear")
+
+      assert conn.assigns.filter == "all"
+      assert Enum.any?(conn.assigns.items, fn i -> i.status == 2 end)
     end
   end
 
